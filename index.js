@@ -216,11 +216,11 @@ function initmap() {
                             }
                             //console.log("Colour is: ", zColour(msoa_scores[feature.properties.MSOA21CD][selectedScore]))
                             return {
-                                color: 'blue', // Polygon border color
-                                weight: 2,     // Border thickness
-                                // fillColor: 'lightblue', // Fill color
+                                color: 'blue',
+                                weight: 2,     
+                                // fillColor: 'lightblue',
                                 fillColor: zColour(msoa_scores[feature.properties.MSOA21CD][selectedScore]),
-                                fillOpacity: 0.7 // Fill opacity
+                                fillOpacity: 0.7
                             }
                         } else {
                             return {};
@@ -264,10 +264,10 @@ function initmap() {
                         return {}
                     }
                     return {
-                        color: 'blue', // Polygon border color
+                        color: 'blue',
                         weight: 2,     // Border thickness
                         fillColor: zColour(msoa_scores[feature.properties.MSOA21CD][selectedScore]),
-                        fillOpacity: 0.7 // Fill opacity
+                        fillOpacity: 0.7 
                     }
                     } else {
                     return {};
@@ -325,9 +325,8 @@ L.Control.CustomOverlay = L.Control.extend({
         </select>
           `;
 
-        container.style.backgroundColor = 'white'; // Set background to white
-
-        // Prevent map from reacting to events inside the control
+        container.style.backgroundColor = 'white';
+        // Prevent map from reacting to events inside
         L.DomEvent.disableClickPropagation(container);
 
         return container;
