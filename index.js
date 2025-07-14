@@ -41,7 +41,7 @@ msoa_scores = {};
 selectedMSOA = null;
 selectedScore = 'Overall';
 
-let github_append = 'cycling-medsat/'
+let github_append = ''
 
 let msoa_scores_path = github_append+`Score Scripts/${region}Datasets/${region}_msoa_scores_zscaled.csv`;
 let medsat_msoa_scores_path = github_append+`MedSat/${region}/msoa_medsat_scores_zscaled.csv`;
