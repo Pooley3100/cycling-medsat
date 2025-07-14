@@ -41,11 +41,9 @@ msoa_scores = {};
 selectedMSOA = null;
 selectedScore = 'Overall';
 
-let github_append = ''
-
-let msoa_scores_path = github_append+`Score Scripts/${region}Datasets/${region}_msoa_scores_zscaled.csv`;
-let medsat_msoa_scores_path = github_append+`MedSat/${region}/msoa_medsat_scores_zscaled.csv`;
-let polygon_path = github_append+`Datasets/Filtered_${region}_Polygon.geojson`;
+let msoa_scores_path = `Score Scripts/${region}Datasets/${region}_msoa_scores_zscaled.csv`;
+let medsat_msoa_scores_path = `MedSat/${region}/msoa_medsat_scores_zscaled.csv`;
+let polygon_path = `Datasets/Filtered_${region}_Polygon.geojson`;
 let cqiRegion = `${region}_cqi_jsons_msoa_REDUCED`;
 
 // Load the CSV file containing MSOA scores
@@ -169,11 +167,11 @@ function resetScores(){
     
     msoa_scores = {};
     selectedMSOA = null;
-    selectedScore = 'Overall';
+    //selectedScore = 'Overall';
     
-    msoa_scores_path = `../Score Scripts/${region}Datasets/${region}_msoa_scores_zscaled.csv`;
-    medsat_msoa_scores_path = `../MedSat/${region}/msoa_medsat_scores_zscaled.csv`;
-    polygon_path = `../Datasets/Filtered_${region}_Polygon.geojson`;
+    msoa_scores_path = `Score Scripts/${region}Datasets/${region}_msoa_scores_zscaled.csv`;
+    medsat_msoa_scores_path = `MedSat/${region}/msoa_medsat_scores_zscaled.csv`;
+    polygon_path = `Datasets/Filtered_${region}_Polygon.geojson`;
     cqiRegion = `${region}_cqi_jsons_msoa`;
     
     // Reset the map by removing all layers
