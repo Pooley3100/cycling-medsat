@@ -8,6 +8,10 @@ let brist_coord = [51.4701862,-2.5957059];
 let leeds_coords = [53.7789516,-1.5475212];
 //Manchester Coords
 let man_coords = [53.4655819,-2.2480237];
+//Sheffield Coords
+let shef_coords = [53.3839402,-1.4542744];
+//liverpool Coords
+let liver_coords = [53.4072995,-2.9907975];
 
 // ===== Edit
 let region = 'London';
@@ -30,6 +34,12 @@ switch (region) {
         break;
     case 'Manchester':
         coords = man_coords;
+        break;
+    case 'Sheffield':
+        coords = shef_coords;
+        break;
+    case 'Liverpool':
+        coords = liver_coords;
         break;
     default:
         coords = ldn_coords;
@@ -158,6 +168,12 @@ function resetScores(){
             break;
         case 'Manchester':
             coords = man_coords;
+            break;
+        case 'Sheffield':
+            coords = shef_coords;
+            break;
+        case 'Liverpool':
+            coords = liver_coords;
             break;
         default:
             coords = ldn_coords;
@@ -393,6 +409,7 @@ function updateMSOAOverlay() {
             <p><strong>Overall Score: ${msoa_scores[selectedMSOA].Overall.toFixed(3)}</strong></p>
             <p><strong>Mean CQI Score: ${msoa_scores[selectedMSOA].MeanCQIScore.toFixed(3)}</strong></p>
             <p><strong>IndexSpaceSyntax: ${msoa_scores[selectedMSOA].IndexSpaceSyntax.toFixed(3)}</strong></p>
+            <p><strong>SpaceSyntaxLength: ${msoa_scores[selectedMSOA].SpaceSyntaxLength.toFixed(3)}</strong></p>
             <p><strong>IndexLength: ${msoa_scores[selectedMSOA].IndexLength.toFixed(3)}</strong></p>
             <p><strong>Commute Path: ${msoa_scores[selectedMSOA].CommutePath.toFixed(3)}</strong></p>
             

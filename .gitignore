@@ -15,6 +15,8 @@ OSM-Cycling-Quality-Index
 !Score Scripts/BristolDatasets/*.csv
 !Score Scripts/ManchesterDatasets/*.csv
 !Score Scripts/LeedsDatasets/*.csv
+!Score Scripts/LiverpoolDatasets/*.csv
+!Score Scripts/SheffieldDatasets/*.csv
 
 !OSM-Cycling-Quality-Index/cycling_quality_index.py
 !OSM-Cycling-Quality-Index/definitions.py
@@ -23,13 +25,17 @@ OSM-Cycling-Quality-Index
 !MedSat/Leeds/** 
 !MedSat/Birmingham/** 
 !MedSat/Bristol/** 
-!MedSat/Manchester/** 
+!MedSat/Manchester/**
+!MedSat/Liverpool/** 
+!MedSat/Sheffield/** 
 
 !Datasets/Birmingham_cqi_jsons_msoa_REDUCED/**
 !Datasets/Leeds_cqi_jsons_msoa_REDUCED/**
 !Datasets/London_cqi_jsons_msoa_REDUCED/**
 !Datasets/Manchester_cqi_jsons_msoa_REDUCED/**
 !Datasets/Bristol_cqi_jsons_msoa_REDUCED/**
+!Datasets/Liverpool_cqi_jsons_msoa_REDUCED/**
+!Datasets/Sheffield_cqi_jsons_msoa_REDUCED/**
 
 !Datasets/Filtered_Birmingham_Polygon.geojson
 !Datasets/Filtered_London_Polygon_ONE.geojson
@@ -37,3 +43,5 @@ OSM-Cycling-Quality-Index
 !Datasets/Filtered_Bristol_Polygon.geojson
 !Datasets/Filtered_Leeds_Polygon.geojson
 !Datasets/Filtered_Manchester_Polygon.geojson
+!Datasets/Filtered_Liverpool_Polygon.geojson
+!Datasets/Filtered_Sheffield_Polygon.geojson

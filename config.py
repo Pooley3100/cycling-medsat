@@ -4,7 +4,9 @@
 #Region = 'Birmingham'
 # Region = 'Bristol'
 # Region = 'Leeds'
-Region = 'Manchester'
+# Region = 'Manchester'
+# Region = 'Sheffield'
+Region = 'Liverpool'
 
 #Add path here for geojson's from Overpass Turbo
 osm_query_boxes_path = f'{Region}-Overpass-Query-Boxes'
