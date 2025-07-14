@@ -172,7 +172,7 @@ function resetScores(){
     msoa_scores_path = `Score Scripts/${region}Datasets/${region}_msoa_scores_zscaled.csv`;
     medsat_msoa_scores_path = `MedSat/${region}/msoa_medsat_scores_zscaled.csv`;
     polygon_path = `Datasets/Filtered_${region}_Polygon.geojson`;
-    cqiRegion = `${region}_cqi_jsons_msoa`;
+    cqiRegion = `${region}_cqi_jsons_msoa_REDUCED`;
     
     // Reset the map by removing all layers
     map.eachLayer((layer) => {
