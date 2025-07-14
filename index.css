@@ -1,0 +1,143 @@
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.main-page {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#iButton {
+    width: auto;
+    margin-right: 20px;
+    margin-top: 10px;
+    font-size: x-large;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    margin-right: 5%;
+}
+
+.NavBar {
+    width: 100%;
+    height: auto;
+    background-color: #e1aeae;
+    border: 2px solid #333;
+    box-shadow: 0 2px 5px rgba(250, 242, 242, 0.2);
+    padding: 10px 20px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(20, 10, 10);
+    font-size: 1.2em;
+
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 1000px) {
+    .title {
+        margin-left: 5%;
+    }
+}
+
+.popupIContainer {
+    transform: translate(-50%, -50%);
+    display: block;
+    position: fixed;
+    background-color: wheat;
+    left: 50%;
+    top: 50%;
+    z-index: 1000;
+    width: 30%;
+    height: 35%;
+    border-radius: 2px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid black;
+    overflow: auto; /* Enable scrolling */
+    max-height: 80%; /* Limit height to allow scrolling */
+    max-width: 90%; /* Limit width to allow scrolling */
+    
+}
+
+.popupText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 2%;
+}
+
+
+.MSOA-Overlay {
+    width: auto;
+    height: auto;
+    white-space: nowrap;
+    padding: 15px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    transition: transform 0.3s ease;
+}
+
+#citySelector {
+    width: 20%;
+    padding: 15px;
+    font-size: 1.2em;
+    border: 2px solid #333;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+#citySelector:focus {
+    outline: none;
+    border-color: #007BFF;
+    /* Change border color on focus */
+}
+
+
+.MSOA-Overlay:hover {
+    transform: scale(1.05);
+}
+
+.Additional-Overlay {
+    margin-top: 10%;
+    width: auto;
+    height: auto;
+    white-space: nowrap;
+    padding: 15px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    transition: transform 0.3s ease;
+}
+
+.Additional-Overlay:hover {
+    transform: scale(1.05);
+}
