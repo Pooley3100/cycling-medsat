@@ -108,15 +108,20 @@ alpha = 0.3
 beta = 0.3
 gamma = 0.4
 msoa_route_score = {}
-for msoa, (route_polygons, destination) in msoa_route.items():
+for msoa_origin, (route_polygons, destination) in msoa_route.items():
     total_score = 0
+    total_pass_throughs = 0
     for msoa in route_polygons:
         if(msoa in results_dict):
+            total_pass_throughs += 1
             total_score += alpha * df.loc[msoa, 'crash_rate_norm'] + beta * df.loc[msoa, 'commute_rate_norm'] + gamma * df.loc[msoa, 'index_space_syntax_length_norm']
             # total_score += results_dict[msoa]['index_space_syntax_length']
+        else:
+            total_pass_throughs -= 1 # If commute goes out of city, just don't include score in calculation
     # total_score = sum(msoa_index_scores.get(msoa, 0) for msoa in route_polygons)
     #That is the commute_route score.
-    msoa_route_score[msoa] = total_score / len(route_polygons) if route_polygons else 0
+    commute_route_score = total_score / total_pass_throughs if route_polygons and total_pass_throughs>0 else 0
+    msoa_route_score[msoa_origin] = commute_route_score
 
 print(msoa_route_score)
 results_file["commute_path"] = results_file["msoa"].map(msoa_route_score).fillna(0).astype(float)
