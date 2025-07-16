@@ -65,11 +65,12 @@ def add_space_syntax(file_path):
     edges_gdf = momepy.nx_to_gdf(G, points=False, lines=True)
 
 
-    # Now to noramlise to compute new score, use min max not Z here?
+    # Now to noramlise to compute new score, use min max 0-1
     sc = MinMaxScaler()
 
-
-    edges_gdf[["index_n"]]       = sc.fit_transform(edges_gdf[["CQI_Score"]])
+    # Don't need to normalise the CQI_Score.
+    edges_gdf[["index_n"]]       = edges_gdf[["CQI_Score"]]/100
+    # Big question here is ONE, whethere to normalise acorss the whole region, But then need betweenness of whole region.
     edges_gdf[["choice_n"]]      = sc.fit_transform(edges_gdf[["edge_bet_mean"]])
     edges_gdf[["integration_n"]] = sc.fit_transform(edges_gdf[["edge_har_mean"]])
 
@@ -82,21 +83,34 @@ def add_space_syntax(file_path):
     )
 
     edges_gdf["index_space_syntax_length"] = edges_gdf['index_space_syntax'] * edges_gdf['length']
+    edges_gdf["index_length"] = edges_gdf['CQI_Score'] * edges_gdf['length']
     edges_gdf = edges_gdf.rename(columns={"seg_id": "id"})
 
     #print(edges_gdf)
     #edges is columns to copy back to streets file
-    edges     = edges_gdf[['id',            
-                        'index_space_syntax_length',
+
+    cols_copy = ['index_space_syntax_length',
                         'index_space_syntax',
-                        'length']].copy()
+                        'index_length',
+                        'length']
+    
+    #Maybe not best solution but very limited duplicates that ruin merge
+    edges_gdf    = edges_gdf.drop_duplicates(subset='id', keep='last')
+    streets_file = streets_file.drop_duplicates(subset='id', keep='first')
 
-    streets_file = streets_file.merge(edges, on='id', how='left')
+    sf   = streets_file.set_index('id')
+    e    = edges_gdf.set_index('id')
+    
+    # Check if the column 'index_space_syntax' exists in streets_file
+    if 'index_space_syntax' in streets_file.columns:
+        sf.update(e[cols_copy])
+        streets_file = sf.reset_index()
+    else:
+        edges_gdf = edges_gdf.rename(columns={"seg_id": "id"})
+        edges     = edges_gdf[cols_copy + ['id']].copy()
+        streets_file = streets_file.merge(edges, on='id', how='left')
 
-    #Also add CQI index weighted by length here
-    streets_file['index_length'] = streets_file['index'] * streets_file['length']
-
-    #Save the updated feature back - adding headers
+    #Save the updated feature back - adding headers, maybe not necessary really
     streets_file = json.loads(streets_file.to_json())
     streets_file["name"] = "cycling_quality_index"
     streets_file["crs"] = {

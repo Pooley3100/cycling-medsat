@@ -1,12 +1,13 @@
 # Configuration settings for Cycling Quality Index
 
 #   ======> Edit <========
-#Region = 'Birmingham'
-# Region = 'Bristol'
-# Region = 'Leeds'
+Region = 'Birmingham'
+#Region = 'Bristol'
+# Region = 'Leeds'
 # Region = 'Manchester'
+# Region = 'London'
 # Region = 'Sheffield'
-Region = 'Liverpool'
+# Region = 'Liverpool'
 
 #Add path here for geojson's from Overpass Turbo
 osm_query_boxes_path = f'{Region}-Overpass-Query-Boxes'
@@ -23,4 +24,6 @@ region_msoa_path = f"{Region}MSOA.csv"
 
 # Path for msoa_scores
 msoa_score_path = f"{Region}_msoa_scores.csv"  
+
+
 

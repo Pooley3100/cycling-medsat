@@ -10,6 +10,7 @@ import json
 from shapely.geometry import Point, shape, LineString
 import sys
 import os
+from sklearn.preprocessing import MinMaxScaler
 
 Region = sys.argv[1]
 
@@ -93,6 +94,15 @@ results_file = pd.read_csv(f"Score Scripts/{Region}Datasets/{Region}_msoa_scores
 
 results_dict = results_file.set_index('msoa').T.to_dict()
 
+scaler = MinMaxScaler()
+columns_to_scale = ['crash_rate', 'commute_rate', 'index_space_syntax_length']
+df = pd.DataFrame.from_dict(results_dict, orient="index")
+
+df[[c + "_norm" for c in columns_to_scale]] = scaler.fit_transform(df[columns_to_scale])
+#Get rid of Nans
+df[[c + "_norm" for c in columns_to_scale]] = df[[c + "_norm" for c in columns_to_scale]].fillna(0.0)
+
+
 #TODO Arbitrary wights?
 alpha = 0.3
 beta = 0.3
@@ -102,7 +112,8 @@ for msoa, (route_polygons, destination) in msoa_route.items():
     total_score = 0
     for msoa in route_polygons:
         if(msoa in results_dict):
-            total_score += alpha * results_dict[msoa]['crash_rate'] + beta * results_dict[msoa]['commute_rate'] + gamma * results_dict[msoa]['index_space_syntax_length']
+            total_score += alpha * df.loc[msoa, 'crash_rate_norm'] + beta * df.loc[msoa, 'commute_rate_norm'] + gamma * df.loc[msoa, 'index_space_syntax_length_norm']
+            # total_score += results_dict[msoa]['index_space_syntax_length']
     # total_score = sum(msoa_index_scores.get(msoa, 0) for msoa in route_polygons)
     #That is the commute_route score.
     msoa_route_score[msoa] = total_score / len(route_polygons) if route_polygons else 0

@@ -20,7 +20,11 @@ for filename in os.listdir(file_path):
                 data = json.load(geojson_file)
                 
                 msoa = data['features'][0]['properties']['msoa']
-                msoa_dict_score[msoa] = data['features'][0]['properties']['msoa_threshold_score']
+                if 'msoa_threshold_score' in data['features'][0]['properties']:
+                    msoa_dict_score[msoa] = data['features'][0]['properties']['msoa_threshold_score']
+                else:
+                    #Outdated key for London
+                    msoa_dict_score[msoa] =  data['features'][0]['properties']['msoa_score']
 
 
 # # Set the directory to the current script's location

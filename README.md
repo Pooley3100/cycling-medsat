@@ -9,7 +9,7 @@ To use = run.py, this should run the user through the steps required to creat a 
 
 # Result msoa_scores csv file, medsat_msoa_scores.csv file. AND boundary output_jsons_msoa file with msoa each way CQI scores
 
-Three cities currently included are Bristol, London, Birmingham
+Seven cities currently included are Bristol, London, Birmingham, Manchester, Liverpool, Sheffield, Leeds
 
 ## Cycling Score Metrics:
 
