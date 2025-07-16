@@ -12,7 +12,10 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-Region = 'London'
+# Change this <-----
+Region = 'Liverpool'
+x_label= 'commute_path'
+y_label='hypertension'
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -34,28 +37,21 @@ df_x = pd.read_csv(
 
 df = (df_y.merge(df_x, on="msoa", how="inner").dropna())
 
-#Pick diff ones from health_met and cyclet_met
-
-X = df['index_space_syntax_length']
-y = df['total']
-
-# X = df[['index_space_syntax_length']]
-# y = df['total']
-
+X = df[x_label]
+y = df[y_label]
 
 # ordinary least squares
 X = sm.add_constant(X)
-
 model = sm.OLS(y, X).fit()
 
 print(model.summary())
 
-#Also a plot if desired:
+#Also a plot
 
-sns.regplot(x='commute_rate', y='hypertension', data=df)
-plt.title('Index Space Syntax Length vs total')
-plt.xlabel('Index Space Syntax Length')
-plt.ylabel('Total Prescription rate')
+sns.regplot(x=x_label, y=y_label, data=df)
+plt.title(f'{x_label} vs {y_label} in {Region}')
+plt.xlabel(x_label)
+plt.ylabel(y_label)
 plt.grid(True)
 plt.tight_layout()
 plt.show()

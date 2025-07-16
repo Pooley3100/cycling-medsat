@@ -10,7 +10,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-Region = 'London'
+Region = 'Liverpool'
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 

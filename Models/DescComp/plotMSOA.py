@@ -7,7 +7,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-Region = 'Birmingham'
+Region = 'London'
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,7 +31,7 @@ df = (df_y.merge(df_x, on="msoa", how="inner").dropna())
 
 
 #Current dependant to compare
-dependant_in = 'commute_path'
+dependant_in = 'commute_rate'
 
 plt.figure(figsize=(15, 10))
 
