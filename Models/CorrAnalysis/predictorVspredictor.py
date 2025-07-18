@@ -1,21 +1,16 @@
-"""
+'''
 
-Applying single predictor regression models to find which cycling scores best correspond to a certain health metric.
+A correlation matrix showing the pearson correlation coefficients between each cycling related variable and health related variable across city and MSOA's.
 
+heatmap matrix is useful here as well.
+'''
 
-"""
-
-import pandas as pd
-import numpy as np
 import os
-import statsmodels.api as sm
-import matplotlib.pyplot as plt
+import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
 
-# Change this <-----
-Region = 'Sheffield'
-x_label= 'commute_path'
-y_label='diabetes'
+Region = 'Liverpool'
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -37,21 +32,18 @@ df_x = pd.read_csv(
 
 df = (df_y.merge(df_x, on="msoa", how="inner").dropna())
 
-X = df[x_label]
-y = df[y_label]
 
-# ordinary least squares
-X = sm.add_constant(X)
-model = sm.OLS(y, X).fit()
+all_predictors = cycle_metrics[1:]
 
-print(model.summary())
+x_only = df[all_predictors]    
+cor_matrix = x_only.corr(method="pearson") 
 
-#Also a plot
 
-sns.regplot(x=x_label, y=y_label, data=df)
-plt.title(f'{x_label} vs {y_label} in {Region}')
-plt.xlabel(x_label)
-plt.ylabel(y_label)
-plt.grid(True)
+plt.figure(figsize=(14,6))
+# Also spectral colour but coolwarm looks more like chloropleth map
+sns.heatmap(cor_matrix, annot=True, fmt=".2f", cmap='coolwarm', linewidths=0.4)
+plt.title(f'predictor-vs-predictor correlation matrix in {Region}')
+plt.xlabel('Cycling Indicators')
+plt.ylabel('Health Outcomes')
 plt.tight_layout()
 plt.show()

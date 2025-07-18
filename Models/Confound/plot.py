@@ -12,7 +12,10 @@ import os
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-Region = 'Sheffield'
+Region = 'London'
+y = 'commute_rate'
+x = 'income'
+
 # --- Dependant variable(s)
 health_metrics = ['msoa', 'diabetes', 'opioids', 'OME', 'total', 'asthma', 'hypertension', 'depression', 'anxiety']
 df_y = pd.read_csv(
@@ -36,8 +39,7 @@ df = (df_y.merge(df_x, on="msoa", how="inner")
     .dropna())
 
 
-y = 'commute_path'
-x = 'income'
+
     
 
 plt.figure(figsize=(12, 6))

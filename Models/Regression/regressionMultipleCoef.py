@@ -19,34 +19,12 @@ import seaborn as sns
 import statsmodels.api as sm
 from sklearn.preprocessing import StandardScaler
 
-Region = 'London'
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 cities = pd.read_csv('../city_list.csv',header=0,names=['cities'])
 
-# Different predictor combinations
-# cycle_in = cycle_metrics[1:] not ideal this one, as some scores build upon others, such as space syntax use CQI score and commute path uses crash and commute rate already
-features = {
-    'Mean_Raw' : ['ScoreCQIMean', 'crash_rate', 'commute_rate'],
-    'Mean_Length' : ['index_length', 'crash_rate', 'commute_rate'],
-    'space_syntax' : ['index_space_syntax', 'crash_rate', 'commute_rate'],
-    'index_space_syntax_length' : ['index_space_syntax_length','crash_rate', 'commute_rate']
-}
-
 scaler = StandardScaler()
-
-
-def regression_model(df):
-    X_in  = scaler.fit_transform(df[features['index_space_syntax_length']])
-    X_in  = sm.add_constant(X_in)                                  
-    y      = df['hypertension']
-    #Ordinary least squares
-    model  = sm.OLS(y, X_in).fit()
-    print(model.summary())
-
-
-# regression_model()
 
 
 city_matrices = {}
