@@ -2,7 +2,7 @@
 
 Sort through medsat data get prescription and census levels for MSOA's. create file london_msoa_medsat_scores.csv
 
-currently just using 2020_spatial_raw_master.csv, can combine with TODO 2019 later
+currently just using 2019_spatial_raw_master.csv, can combine with TODO 2020 later?
 
 
 current vairable are presciription calcs in this order: o_diabetes_quantity_per_capita,o_opioids_quantity_per_capita,o_OME_per_capita,o_total_quantity_per_capita,o_asthma_quantity_per_capita,o_hypertension_quantity_per_capita,o_depression_quantity_per_capita,o_anxiety_quantity_per_capita

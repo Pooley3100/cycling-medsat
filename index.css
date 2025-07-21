@@ -19,6 +19,12 @@ body {
     padding: 0;
 }
 
+#descBox{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
 #iButton {
     width: auto;
     margin-right: 20px;
@@ -140,4 +146,29 @@ body {
 
 .Additional-Overlay:hover {
     transform: scale(1.05);
+}
+
+#CQILegend{
+    width: auto;
+    height: auto;
+    white-space: nowrap;
+    padding: 15px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    transition: transform 0.3s ease;
+}
+
+.CQILegendBox{
+    display: inline-block; 
+    width: 20px; 
+    height: 20px;
+}
+
+.CQILegendList{
+    list-style-type: none;
+    padding: 0;
+    margin: 0; 
 }

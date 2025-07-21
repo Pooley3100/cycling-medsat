@@ -12,7 +12,7 @@ from sklearn.preprocessing import StandardScaler
 # Edit this <------
 Region = 'London'
 x_label_features = 'index_space_syntax_length'
-y_label = 'hypertension'
+y_label = 'diabetes'
 
 
 

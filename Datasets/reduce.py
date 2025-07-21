@@ -34,7 +34,7 @@ def create_reduced_folder(src_dir, dst_dir):
         dst_path = os.path.join(dst_dir, fname)
 
         gdf = gpd.read_file(src_path)        
-        reduced = gdf[['geometry', 'index_10']]  # keep only the two columns
+        reduced = gdf[['geometry', 'index_10', 'index_space_syntax_length_norm']]  # keep only the two columns
 
         # write a proper GeoJSON FeatureCollection out
         reduced.to_file(dst_path, driver='GeoJSON')

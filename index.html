@@ -31,6 +31,9 @@
         <button id="iButton">i</button>
     </div>
     <div id="map"></div>
+    <div id="descBox">
+        <p id="descP">(Z Score) A combination of the Space Index Score + The commute rate score + the crash rate score </p>
+    </div>
     <script src="index.js"></script>
 </div>
 
@@ -43,6 +46,13 @@
         <p>Select any MSOA polygon to get a breakdown of its specific scores. Also use the two left drop down menus for different scores and cities.</p>
         <p>The cycling scores are obtained from UK Census Data, The Department for Transportation database and OpenStreetMap.</p>
         <p>For the health data, this uses prescription data obtained by the MedSat dataset.</p>
+        <p>All scores given are in Z Scores. A Z-score tells you how far a value is from the mean in units of standard deviations </p>
+        <ul>
+            <li>0 → exactly at the mean</li>
+            <li>+1 z → One Standard Deviation above the mean</li>
+            <li>-1 z → One Standard Deviation below the mean</li>
+        </ul>
+        <p>At the bottom of the page will be a description of what the score selected means</p>
     </div>
 </div>
 
