@@ -35,14 +35,14 @@ let scoreDesc = {
     "IndexSpaceSyntax": "(Z Score) The Cycling Quality Index Score of all ways weighted by the roads edge harmonic and betweenness centrality",
     "SpaceSyntaxLength": "(Z Score) The Cycling Quality Index Score of all ways weighted by the roads edge harmonic and betweenness centrality and weighted by road length",
     "CommutePath": "(Z Score) The average Space Index Length, crash rate and commute rate along the most popular commute route from the selected MSOA.",
-    "diabetes": "(Z Score) The average prescription rate of diabetes in the MSOA",
-    "OME": "(Z Score) The average prescription rate of OME medication in the MSOA",
-    "asthma": "(Z Score) The average prescription rate of asthma in the MSOA",
-    "anxiety": "(Z Score) The average prescription rate of anxiety disorders in the MSOA",
-    "depression": "(Z Score) The average prescription rate of depression in the MSOA",
-    "hypertension": "(Z Score) The average prescription rate of hypertension in the MSOA",
-    "opioids": "(Z Score) The average prescription rate of opioid use in the MSOA",
-    "total": "(Z Score) The total number of health-related incidents in the MSOA"
+    "diabetes": "(Z Score) The prescription rate of diabetes in the MSOA",
+    "OME": "(Z Score) The prescription rate of OME medication in the MSOA",
+    "asthma": "(Z Score) The prescription rate of asthma in the MSOA",
+    "anxiety": "(Z Score) The prescription rate of anxiety disorders in the MSOA",
+    "depression": "(Z Score) The prescription rate of depression in the MSOA",
+    "hypertension": "(Z Score) The prescription rate of hypertension in the MSOA",
+    "opioids": "(Z Score) The prescription rate of opioid use in the MSOA",
+    "total": "(Z Score) The total health prescription rate in the MSOA"
 };
 
 //Used for zColour - Optional, currently not being used
