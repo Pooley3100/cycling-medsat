@@ -20,10 +20,12 @@ let region = 'London';
 let coords;
 
 let developerActive = false;
+let singleColour = false;
 
 //Check if dev
 const urlParams = new URLSearchParams(window.location.search);
 developerActive = urlParams.has('dev') ? true : false;
+singleColour = urlParams.has('colour') ? true : false
 
 let scoreDesc = {
     "CQIScoreThresh": "(Z Score) The percentage of total streets within the MSOA with a CQI Score over 55",
@@ -45,7 +47,7 @@ let scoreDesc = {
     "total": "(Z Score) The total health prescription rate in the MSOA"
 };
 
-//Used for zColour - Optional, currently not being used
+//Used for zColour - Optional
 let scoreColours = {
     "CQIScoreThresh": "#FF5733", // Red
     "CrashRate": "#C70039",      // Dark Red
@@ -193,42 +195,41 @@ const cartoBasemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z
     subdomains: 'abcd',
     maxZoom: 20,
     minZoom: 0
-  }).addTo(map);
+}).addTo(map);
 
 
 function setupColourmap(min = -3, max = 3, scheme = d3.interpolateRdBu) {
     /* Diverging scale centred on 0, Flips depending on value, goal is Blue GOOD, Red=BAD */
-    if (['diabetes', 'CrashRate', 'OME', 'asthma', 'anxiety', 'depression', 'hypertension', 'opioids', 'total'].includes(selectedScore)) {
-        [min, max] = [max, min];
-        flipLegend(true);
-    } else {
-        //Catch DOM load test
-        let test = document.getElementById('legendBox');
-        if (test != null) {
-            flipLegend(false);
+    if (!singleColour) {
+        if (['diabetes', 'CrashRate', 'OME', 'asthma', 'anxiety', 'depression', 'hypertension', 'opioids', 'total'].includes(selectedScore)) {
+            [min, max] = [max, min];
+            flipLegend(true);
+        } else {
+            //Catch DOM load test
+            let test = document.getElementById('legendBox');
+            if (test != null) {
+                flipLegend(false);
+            }
         }
+        return d3.scaleDiverging(scheme)
+            .domain([min, 0, max])
+            .clamp(true);            // clip out‑of‑range scores to the ends
+    } else {
+        /* Alternative function for having one colour per score: */
+        const baseColour = scoreColours[selectedScore] || "#888"; //Colour to interpolate
+        let [low, high] = [d3.color("black"), d3.color(baseColour)];
+
+        if (['diabetes', 'CrashRate', 'OME', 'asthma', 'anxiety', 'depression', 'hypertension', 'opioids', 'total'].includes(selectedScore)) {
+            [low, high] = [d3.color(baseColour), d3.color("white")];
+        }
+
+        return d3.scaleLinear()
+            .domain([min, max])
+            .range([low, high])
+            .interpolate(d3.interpolateRgb)
+            .clamp(true);
     }
-    return d3.scaleDiverging(scheme)
-        .domain([min, 0, max])
-        .clamp(true);            // clip out‑of‑range scores to the ends
 }
-
-/* Alternative function for having one colour per score: */
-
-// function setupColourmap(min = -4, max = 4) {
-//     const baseColour = scoreColours[selectedScore] || "#888"; //Colour to interpolate
-//     let [low, high] = [d3.color("black"), d3.color(baseColour)];
-
-//     if (['diabetes', 'CrashRate', 'OME', 'asthma', 'anxiety', 'depression', 'hypertension', 'opioids', 'total'].includes(selectedScore)) {
-//         [low, high] = [d3.color(baseColour), d3.color("white")];
-//     }
-
-//     return d3.scaleLinear()
-//         .domain([min, max])
-//         .range([low, high])
-//         .interpolate(d3.interpolateRgb)
-//         .clamp(true);
-// }
 
 function resetScores() {
     //Check if city changed
