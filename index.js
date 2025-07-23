@@ -320,8 +320,8 @@ function initmap() {
                             }
                             //console.log("Colour is: ", zColour(msoa_scores[feature.properties.MSOA21CD][selectedScore]))
                             return {
-                                color: 'blue',
-                                weight: 1,
+                                color: 'grey',
+                                weight: 0.5,
                                 // fillColor: 'lightblue',
                                 fillColor: zColour(msoa_scores[feature.properties.MSOA21CD][selectedScore]),
                                 fillOpacity: 1
@@ -368,8 +368,8 @@ function initmap() {
                                     return {}
                                 }
                                 return {
-                                    color: 'blue',
-                                    weight: 1,     // Border thickness
+                                    color: 'grey',
+                                    weight: 0.5,     // Border thickness
                                     fillColor: zColour(msoa_scores[feature.properties.MSOA21CD][selectedScore]),
                                     fillOpacity: 1
                                 }

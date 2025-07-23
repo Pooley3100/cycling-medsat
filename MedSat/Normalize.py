@@ -29,7 +29,7 @@ scaler = StandardScaler()
 df_z_vals = scaler.fit_transform(df[numeric_cols])
 
 df_z = pd.concat(
-    [df[id_col],                          # keep IDs intact
+    [df[id_col],                       
      pd.DataFrame(df_z_vals,
                   columns=numeric_cols,
                   index=df.index)],
