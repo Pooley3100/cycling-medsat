@@ -7,7 +7,9 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-Region = 'London'
+Region = 'Sheffield'
+#Current dependant to compare
+dependant_in = 'commute_path'
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -27,11 +29,10 @@ df_x = pd.read_csv(
     names=['msoa', 'ScoreCQI', 'crash_rate', 'commute_rate', 'OverallCycleScore', 'ScoreCQIMean', 'index_length', 'index_space_syntax', 'index_space_syntax_length', 'commute_path']
 )
 
+#Outlier removal, as seen in London, total one with score over 2000 (4,000+)
+df_y = df_y[df_y['total'] <= 2000]
+
 df = (df_y.merge(df_x, on="msoa", how="inner").dropna())
-
-
-#Current dependant to compare
-dependant_in = 'commute_rate'
 
 plt.figure(figsize=(15, 10))
 
