@@ -13,7 +13,7 @@ from sklearn.preprocessing import StandardScaler
  
 
 # Edit this <------
-Region = 'London'
+Region = 'Manchester'
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -143,6 +143,6 @@ for _, row in coef_long.iterrows():
 
 ax.set_ylabel('Health metric')
 ax.set_xlabel('Standardised coefficient')
-ax.set_title('OLS coefficients with (95% confindence bars)')
+ax.set_title('OLS coefficients with (95% confidence bars)')
 plt.tight_layout()
 plt.show()

@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 
 import pandas as pd
 import os
+import statsmodels.api as sm
+import seaborn as sns
+from sklearn.preprocessing import StandardScaler
 
 
 
@@ -40,12 +43,18 @@ df = (df_y.merge(df_x, on="msoa", how="inner")
 
 
 
-    
+scaler = StandardScaler()
+X_Scaled = scaler.fit_transform(df[[x]])
 
-plt.figure(figsize=(12, 6))
-plt.scatter(df[x], df[y], alpha=0.8)
-plt.title(f'{y} Scores vs Income')
-plt.xlabel('Income')
-plt.ylabel(f'{y} Scores')
+X = sm.add_constant(X_Scaled)
+model = sm.OLS(df[y], X).fit()
+print(model.summary())
+
+#Also a plot
+sns.regplot(x=x, y=y, data=df)
+plt.title(f'{x} vs {y} in {Region}')
+plt.xlabel(x)
+plt.ylabel(y)
 plt.grid(True)
+plt.tight_layout()
 plt.show()
