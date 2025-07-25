@@ -28,16 +28,14 @@ scaler = StandardScaler()
 
 
 city_matrices = {}
-#Building the coefficient matrix for every health outcome
+#Building the coefficient matrix for every health outcome for subplts
 def build_matrix(df):
     coef_matrix = pd.DataFrame(index=health_metrics[1:], columns=cycle_metrics[1:])
 
     for h in health_metrics[1:]:
         y = df[h]
         y_norm = scaler.fit_transform(df[[h]])
-        #Standardise each independent varaible feature
         x_norm = scaler.fit_transform(df[cycle_metrics[1:]]) 
-        #Need to convert back to dataframe or else assingments get lost
         x_norm = pd.DataFrame(x_norm, columns=cycle_metrics[1:])
 
         #intercept to independatn variables (part 1 of fitting regression)
@@ -46,18 +44,6 @@ def build_matrix(df):
         res = sm.OLS(y_norm, x_norm).fit()
 
         coef_matrix.loc[h] = res.params[cycle_metrics[1:]]
-
-    # print(coef_matrix)
-
-
-    # plt.figure(figsize=(14,6))
-    # # Also spectral colour but coolwarm looks more like chloropleth map
-    # sns.heatmap(coef_matrix.astype(float), annot=True, fmt=".2f", center=0, cmap='coolwarm', linewidths=0.4)
-    # plt.title(f'Coefficient Matrix comparing health outcomees to cycling scores in {Region}')
-    # plt.xlabel('Cycling Indicators')
-    # plt.ylabel('Health Outcomes')
-    # plt.tight_layout()
-    # plt.show()
 
     city_matrices[city] = coef_matrix.astype(float)
 
@@ -88,11 +74,14 @@ for city in cities['cities']:
 # One big super plot with subplots
 fig, axes = plt.subplots(3, 3, figsize=(26, 13))
 
-for ax, (city, matrix) in zip(axes.flat, city_matrices.items()):
+for idx, (ax, (city, matrix)) in enumerate(zip(axes.flat, city_matrices.items())):
     sns.heatmap(matrix, ax=ax, annot=True, fmt=".2f", cmap="coolwarm", center=0)
     ax.set_title(f"{city}")
     ax.set_xlabel("Cycling Metrics")
-    ax.set_ylabel("Health Outcomes")
+    ax.set_ylabel("Prescription Rates")
+    if idx in [1, 2, 4, 5]:
+        ax.set_ylabel("")
+        ax.yaxis.set_visible(False)
 
 for ax in axes.flat[len(city_matrices):]:
     fig.delaxes(ax)

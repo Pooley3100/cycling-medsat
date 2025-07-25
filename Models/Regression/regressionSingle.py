@@ -11,11 +11,13 @@ import os
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.preprocessing import MinMaxScaler
 
 # Change this <-----
-Region = 'Sheffield'
+Region = 'Liverpool'
 x_label= 'commute_path'
 y_label='diabetes'
+#Threshold Score (ScoreCQI), Crash Rate, Commute Rate, CQI Mean (index_length), CQI Space Syntax (index_space_syntax_length) and Commute Path.
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,6 +40,8 @@ df_x = pd.read_csv(
 df = (df_y.merge(df_x, on="msoa", how="inner").dropna())
 
 X = df[x_label]
+# scaler = MinMaxScaler()
+# X = scaler.fit_transform(df[[x_label]])
 y = df[y_label]
 
 # ordinary least squares

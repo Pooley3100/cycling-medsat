@@ -1,16 +1,12 @@
 '''
 
-A correlation matrix showing the pearson correlation coefficients between each cycling related variable and health related variable across city and MSOA's.
-
-heatmap matrix is useful here as well.
+A correlation matrix showing the pearson correlation coefficients between each cycling
+related variable and health related variable across ALL cities
 '''
-
 import os
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-
-#Region = 'London'
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 cities = pd.read_csv('../city_list.csv',header=0,names=['cities'])
@@ -48,18 +44,20 @@ for city in cities['cities']:
         city_matrices[city] = matrix
 
 
-# One big super plot with subplots
+#One big super plot with subplots, clamp 0.6 works well
 fig, axes = plt.subplots(3, 3, figsize=(26, 13))
 axes = axes.flatten()
-for idx, (city, matrix) in enumerate(city_matrices.items()):
-    sns.heatmap(matrix, ax=axes[idx], annot=True, fmt=".2f",
-            cmap="coolwarm", vmin=-0.6, vmax=0.6)
-    axes[idx].set_title(f"{city}")
-    axes[idx].set_xlabel("Cycling Metrics")
-    axes[idx].set_ylabel("Health Outcomes")
+for id, (city, matrix) in enumerate(city_matrices.items()):
+    sns.heatmap(matrix, ax=axes[id], annot=True, fmt=".2f",
+            cmap="coolwarm", vmin=-0.6, vmax=0.6, cbar=False)
+    axes[id].set_title(f"{city}")
+    axes[id].set_xlabel("Cycling Metrics")
+    if id in [1, 2, 4, 5]:  #Hide y-axis for some plots
+        axes[id].set_ylabel("")
+        axes[id].yaxis.set_visible(False)
 
-for j in range(idx + 1, len(axes)):
-    fig.delaxes(axes[j])
+for i in range(id + 1, len(axes)):
+    fig.delaxes(axes[i])
 
 plt.tight_layout()
 plt.show()

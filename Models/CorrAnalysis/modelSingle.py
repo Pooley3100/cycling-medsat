@@ -1,8 +1,7 @@
 '''
 
-A correlation matrix showing the pearson correlation coefficients between each cycling related variable and health related variable across city and MSOA's.
-
-heatmap matrix is useful here as well.
+A correlation matrix showing the pearson correlation coefficients heatmap matrix  
+between each cycling related variable and health related variable across SINGLE city
 '''
 
 import os
@@ -10,7 +9,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-Region = 'Liverpool'
+Region = 'London'
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -39,8 +38,8 @@ cor_matrix = df_cor.corr().loc[health_metrics[1:],cycle_metrics[1:]]
 plt.figure(figsize=(14,6))
 # Also spectral colour but coolwarm looks more like chloropleth map
 sns.heatmap(cor_matrix, annot=True, fmt=".2f", cmap='coolwarm', linewidths=0.4)
-plt.title(f'Correlation Matrix: Health Outcomes vs Cycling Metrics in {Region}')
+plt.title(f'Correlation Matrix: Prescription Rates vs Cycling Metrics in {Region}')
 plt.xlabel('Cycling Indicators')
-plt.ylabel('Health Outcomes')
+plt.ylabel('Prescription Rates')
 plt.tight_layout()
 plt.show()

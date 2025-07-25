@@ -11,8 +11,8 @@ from sklearn.preprocessing import StandardScaler
  
 # Edit this <------
 Region = 'London'
-x_label_features = 'index_space_syntax_length'
-y_label = 'diabetes'
+x_label_features = 'Remove_crash_threshold'
+y_label = 'hypertension'
 
 
 
@@ -22,6 +22,9 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 # Different predictor combinations
 # cycle_in = cycle_metrics[1:] not ideal this one, as some scores build upon others, such as space syntax use CQI score and commute path uses crash and commute rate already
 features = {
+    'All_not_Flagged' : ['ScoreCQI', 'crash_rate', 'commute_rate', 'index_length', 'index_space_syntax_length', 'commute_path'],
+    'Remove_crash' : ['ScoreCQI', 'commute_rate', 'index_length', 'index_space_syntax_length', 'commute_path'],
+    'Remove_crash_threshold' : ['commute_rate', 'index_length', 'index_space_syntax_length', 'commute_path'], #Best one
     'Mean_Raw' : ['ScoreCQIMean', 'crash_rate', 'commute_rate'],
     'Mean_Length' : ['index_length', 'crash_rate', 'commute_rate'],
     'space_syntax' : ['index_space_syntax', 'crash_rate', 'commute_rate'],
@@ -53,6 +56,7 @@ def regression_model(df):
     X_in  = scaler.fit_transform(df[features[x_label_features]])
     X_in  = sm.add_constant(X_in)                                  
     y      = df[y_label]
+    y = scaler.fit_transform(df[[y_label]]).flatten()
     #Ordinary least squares
     model  = sm.OLS(y, X_in).fit()
     print(model.summary())
