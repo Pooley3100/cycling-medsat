@@ -3,11 +3,15 @@
 *.geojson
 MedSat/image_features/*
 *.zip
-Datasets/ONSPD_MAY_2025 (1)
+Archive/
+.DS_Store
 *.xlsx
 *.txt
 *.pmtiles
-OSM-Cycling-Quality-Index
+__pycache__/
+OSM-Cycling-Quality-Index/__pycache__/
+
+!requirements.txt
 
 
 !Score Scripts/BirminghamDatasets/*.csv

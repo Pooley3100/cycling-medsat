@@ -14,9 +14,9 @@ import seaborn as sns
 from sklearn.preprocessing import MinMaxScaler
 
 # Change this <-----
-Region = 'Liverpool'
-x_label= 'commute_path'
-y_label='diabetes'
+Region = 'London'
+x_label= 'OverallCycleScore'
+y_label='hypertension'
 #Threshold Score (ScoreCQI), Crash Rate, Commute Rate, CQI Mean (index_length), CQI Space Syntax (index_space_syntax_length) and Commute Path.
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))

@@ -7,9 +7,9 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
-Region = 'Sheffield'
+Region = 'London'
 #Current dependant to compare
-dependant_in = 'commute_path'
+dependant_in = 'commute_rate'
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 

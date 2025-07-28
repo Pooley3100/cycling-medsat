@@ -10,14 +10,16 @@ from sklearn.preprocessing import StandardScaler
 import numpy as np
 scaler = StandardScaler()
 
-os.chdir(os.path.dirname(__file__))
-current_directory = os.getcwd()
 
-cities = pd.read_csv('../Models/city_list.csv',header=0,names=['cities'])
+Region = os.sys.argv[1]
+
+# os.chdir(os.path.dirname(__file__))
+# current_directory = os.getcwd()
+
+# cities = pd.read_csv('../Models/city_list.csv',header=0,names=['cities'])
 
 city_way_paths = []
-for city in cities['cities']:
-    city_way_paths.append(f'{city}_cqi_jsons_msoa')
+city_way_paths.append(f'Datasets/{Region}_cqi_jsons_msoa')
 
 for city in city_way_paths:
     for filename in os.listdir(city+'/'):

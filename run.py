@@ -23,7 +23,8 @@ Pipeline Flow to re-create for anywhere in UK (MedSat Limitation):
 18) Overall (hmm not a fan of this one really)
 17) Run Normalise.py in Score Rates
 18) Run filter.py in MedSat to create corresponding health scores for the required MSOA's
-19) Edit index.js to visualise
+19) Reduce, add space space syntax norm scores and reduced folder
+20) Edit index.js to visualise
 
 """
 
@@ -275,5 +276,22 @@ if not os.path.exists(medsat_folder_path + '/' + 'msoa_medsat_scores_zscaled.csv
     else:
         print("Medsat scores normalized!", result.stdout)
 
+# Run reduce norm and reduce file
+if not os.path.exists(f'Datasets/{Region}_cqi_jsons_msoa_REDUCED'):
+    script = 'Datasets/normalizeSpaceSyntax.py'
+    result = subprocess.run(['python', script, Region], capture_output=True, text=True)
+
+    if result.returncode != 0:
+        print("Space Syntax Normalization error", result.stderr)
+    else:
+        print("Space Syntax scores normalized", result.stdout)
+
+    script = 'Datasets/reduce.py'
+    result = subprocess.run(['python', script, Region], capture_output=True, text=True)
+
+    if result.returncode != 0:
+        print("reduce file error", result.stderr)
+    else:
+        print("reduced file created", result.stdout)
 
 print("Done")
