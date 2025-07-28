@@ -16,13 +16,13 @@ To use run.py, this should run the user through the steps required to creat a cy
 
 ## Steps user will need to take
 
-1) Running Overpass turbo on desired region, potentiall in sub boxes if big (i.e London) and adding path name to config.py with overpass geojson boxes in.
-2) Requires manually running OSM-Cycling-Quality-Index (UK edited script)(REMOVE MPH) in QGIS, also remove all mph mentions manually in geojson <---
-3) Creating MSOA region file for desired region, this file is created but need to be filled in by the user
+1) Running Overpass turbo on desired region (creating a BBOX boundary), potentiall in sub boxes if big (i.e London) and adding the Region name to config.py with the path name to overpass geojson boxes in.
+2) Run.py
+2) Requires manually running OSM-Cycling-Quality-Index [https://www.osm-verkehrswende.org/cqi/] (UK edited script)(REMOVE MPH MANUALLY) in QGIS, read README within file, script modified for UK but ALL creditation goes to osm-verkehrswende. Essentially download [https://qgis.org/], load OSM-Cycling-Quality-Index folder, then load cycling_quality_index.py into the QGIS python scripts editor, make sure way_import.geojson, with mph removed, created by run.py is placed in data sub directory, then run the python file cycling_quality_index.py.
+3) Creating MSOA.csv region file for desired region, this file is created but needs to be filled in by the user so the program know which MSOA boundaries to include, look at other Dataset files for an idea. (i.e. LondonMSOA.csv)
+4) Scores should be created, to visualise edit top of index.js to include new location
 
-# Result msoa_scores csv file, medsat_msoa_scores.csv file. AND boundary output_jsons_msoa file with msoa each way CQI scores
-
-Seven cities currently included are Bristol, London, Birmingham, Manchester, Liverpool, Sheffield, Leeds
+Results = msoa_scores csv file, medsat_msoa_scores.csv file. AND boundary output_jsons_msoa file with msoa broken down into way scores.
 
 ## Cycling Score Metrics by MSOA:
 
