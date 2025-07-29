@@ -12,7 +12,11 @@ __pycache__/
 OSM-Cycling-Quality-Index/__pycache__/
 
 !requirements.txt
-
+!Datasets/ALL-MSOA-Names.csv
+!Datasets/dft-road-casualty-statistics-casualty-2021.csv
+!Datasets/LSOAtoMSOAlookup.csv
+!Datasets/MethodTravelToWork.csv
+!Datasets/Middle_layer_Super_Output_Areas_December_2021_Boundaries_EW_BGC_V3.geojson
 
 !Score Scripts/BirminghamDatasets/*.csv
 !Score Scripts/LondonDatasets/*.csv
