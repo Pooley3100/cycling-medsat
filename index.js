@@ -31,19 +31,19 @@ let scoreDesc = {
     "CQIScoreThresh": "(Z Score) The percentage of total streets within the MSOA with a CQI Score over 55",
     "CrashRate": "(Z Score) The Number of Cycling Incidents (slight/serious/fatal) that have occurred within the MSOA",
     "CommuteRate": "(Z Score) The percentage of people who cycle to work",
-    "Overall": "(Z Score) A combination of the Space Index Score + The commute rate score + the crash rate score ",
-    "MeanCQIScore": "(Z Score) The average Cycling Quality Index Score of all ways in an MSOA ",
+    "Overall": "(Z Score) A composite score including the CQI Space Index, the commute rate and the crash rate",
+    "MeanCQIScore": "(Z Score) The average Cycling Quality Index Score of all streets in an MSOA ",
     "IndexLength": "(Z Score) The average Cycling Quality Index Score of all ways in an MSOA weighted by road length",
-    "IndexSpaceSyntax": "(Z Score) The Average Cycling Quality Index Score of all ways weighted by the roads edge harmonic and betweenness centrality",
-    "SpaceSyntaxLength": "(Z Score) The Average Cycling Quality Index Score of all ways (roads) weighted by the ways edge harmonic and betweenness centrality and road length",
-    "CommutePath": "(Z Score) The average Space Index Length, crash rate and commute rate along the most popular commute route from the selected MSOA.",
+    "IndexSpaceSyntax": "(Z Score) The Average Cycling Quality Index Score of all streets, with each street CQI score weighted by the roads edge harmonic and betweenness centrality",
+    "SpaceSyntaxLength": "(Z Score) The average Cycling Quality Index score of all streets in the MSOA weighted by space syntax methods",
+    "CommutePath": "(Z Score) This composite score provides a route-based view of the cycling conditions a cycling commuter would face for each MSOA",
     "diabetes": "(Z Score) The prescription rate of diabetes in the MSOA",
     "OME": "(Z Score) The prescription rate of OME medication in the MSOA",
-    "asthma": "(Z Score) The prescription rate of asthma in the MSOA",
-    "anxiety": "(Z Score) The prescription rate of anxiety disorders in the MSOA",
-    "depression": "(Z Score) The prescription rate of depression in the MSOA",
-    "hypertension": "(Z Score) The prescription rate of hypertension in the MSOA",
-    "opioids": "(Z Score) The prescription rate of opioid use in the MSOA",
+    "asthma": "(Z Score) The prescription rate for asthma in the MSOA",
+    "anxiety": "(Z Score) The prescription rate for anxiety in the MSOA",
+    "depression": "(Z Score) The prescription rate for depression in the MSOA",
+    "hypertension": "(Z Score) The prescription rate for hypertension in the MSOA",
+    "opioids": "(Z Score) The prescription rate for opioids in the MSOA",
     "total": "(Z Score) The total health prescription rate in the MSOA"
 };
 
@@ -98,7 +98,7 @@ let map = L.map('map').setView(coords, 11); // Set to city loc and zoom
 
 msoa_scores = {};
 selectedMSOA = null;
-selectedScore = 'Overall';
+selectedScore = 'CommuteRate';
 
 let msoa_scores_path = `Score Scripts/${region}Datasets/${region}_msoa_scores_zscaled.csv`;
 let medsat_msoa_scores_path = `MedSat/${region}/msoa_medsat_scores_zscaled.csv`;
@@ -409,23 +409,23 @@ L.Control.CustomOverlay = L.Control.extend({
         container.innerHTML = `
         <label for="cycleSelect">Choose Score:</label>
         <select id="mySelect" style="height: 40px;">
+          <option value="CommuteRate"><b>Commuter Rate</b></option>
           <option value="Overall">Overall Score</option>
           
-          <option value="CommuteRate">Commuter Rate</option>
           <option value="CrashRate">Crash Rate</option>
           <option value="MeanCQIScore">Mean CQI Scores</option>
           
           ${developerActive ? `<option value="SpaceSyntaxLength">SpaceSyntaxLength</option>` : ''}
           ${!developerActive ? `<option value="SpaceSyntaxLength">CQI Space Syntax</option>` : ''}
-          <option value="CommutePath">CommutePath</option>
+          <option value="CommutePath">Commute Path</option>
           
           <option value="diabetes">Diabetes</option>
-          <option value="anxiety">anxiety</option>
-          <option value="asthma">asthma</option>
-          <option value="depression">depression</option>
-          <option value="hypertension">hypertension</option>
-          <option value="opioids">opioids</option>
-          <option value="total">total</option>
+          <option value="anxiety">Anxiety</option>
+          <option value="asthma">Asthma</option>
+          <option value="depression">Depression</option>
+          <option value="hypertension">Hypertension</option>
+          <option value="opioids">Opioids</option>
+          <option value="total">Total</option>
 
           ${developerActive ? `<option value="OME">OME</option>` : ''}
           ${developerActive ? `<option value="IndexSpaceSyntax">IndexSpaceSyntax</option>` : ''}
@@ -602,27 +602,45 @@ function flipLegend(reversed) {
 
 //I Box Logic
 document.addEventListener("DOMContentLoaded", function () {
-    const popup = document.getElementById("popupIContainer");
-    const popupButton = document.getElementById("iButton");
-    document.addEventListener("click", () => {
-        if (popup.style.display === "block") {
-            popup.style.display = "none";
+    const popupI = document.getElementById("popupIContainer");
+    const popupD = document.getElementById("popupDContainer");
+    const popupButtonI = document.getElementById("iButton");
+    const popupButtonD = document.getElementById("DButton");
+    popupButtonI.addEventListener("click", (event) => {
+        event.stopPropagation();
+        if (popupI.style.display === "block") {
+            popupI.style.display = "none";
+        } else {
+            if(popupD.style.display === "block"){
+                popupD.style.display = "none";
+            }
+            popupD.style.backgroundColor = '#f3fcaf';
+            popupI.style.display = "block";
         }
     });
-    popupButton.addEventListener("click", (event) => {
+    //Description box display
+    popupButtonD.addEventListener("click", (event) => {
         event.stopPropagation();
-        if (popup.style.display === "block") {
-            popup.style.display = "none";
+        if (popupD.style.display === "block") {
+            popupD.style.display = "none";
         } else {
-            popup.style.display = "block";
+            if(popupI.style.display === "block"){
+                popupI.style.display = "none";
+            }
+            popupD.style.backgroundColor = '#a5e0f9';
+            popupD.style.display = "block";
         }
     });
 });
 
 document.addEventListener("click", (event) => {
-    const popup = document.getElementById("popupIContainer");
-    if (popup.style.display === "block") {
-        popup.style.display = "none";
+    const popupI = document.getElementById("popupIContainer");
+    const popupD = document.getElementById("popupDContainer");
+    if (popupI.style.display === "block") {
+        popupI.style.display = "none";
+    }
+    if (popupD.style.display === "block") {
+        popupD.style.display = "none";
     }
 });
 

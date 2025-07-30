@@ -27,12 +27,16 @@
             <option value="Sheffield">Sheffield</option>
             <option value="Liverpool">Liverpool</option>
         </select>
-        <h1 class="title">Cycling and Health</h1>
-        <button id="iButton">i</button>
+        <h1 class="title">Pedal-Powered Health</h1>
+        <div class="iWrapper">
+            <button id="iButton" class="selectorButton">i</button>
+        </div>
     </div>
     <div id="map"></div>
     <div id="descBox">
-        <p id="descP">(Z Score) A combination of the Space Index Score + The commute rate score + the crash rate score </p>
+        <p id="descP">(Z Score) The percentage of people who cycle to work
+        </p>
+        <button id="DButton" class="selectorButton">Score Descriptions</button>
     </div>
     <script src="index.js"></script>
 </div>
@@ -41,24 +45,62 @@
 <div class="popupIContainer" style="display: block;" id="popupIContainer">
     <div class="popupText">
         <h2>About</h2>
-        <p>This dashboard aims to compare localized health values with various cycling scores at a Medium Super Output Area Level (MSOA)
+        <div class="attribute">
+        <i class="pAttribute">Dashboard for MSc Thesis - Advanced Computing at King's College London</i>
+        <i class="pAttribute">Title: Pedal-Powered Health: The Interplay Between Urban Cycling Infrastructure and Public Health</i>
+        <i class="pAttribute">By: Matthew Poole</i>
+        <i class="pAttribute">Supervisor: Linus Dietz</i>
+        </div>
+        
+        <p>This dashboard aims to compare localized health values with various cycling scores at a Medium Super Output
+            Area Level (MSOA)
             for UK Cities.</p>
-        <p>Select any MSOA polygon to get a breakdown of its specific scores. Also use the two left drop down menus for different scores and cities.</p>
-        <p>The cycling scores are obtained from UK Census Data, The Department for Transportation database and OpenStreetMap.</p>
+        <p>Select any MSOA polygon to get a breakdown of its specific scores. Also use the two left drop down menus for
+            different scores and cities.</p>
+        <p>The cycling scores are obtained from UK Census Data, The Department for Transportation database and
+            OpenStreetMap.</p>
         <p>For the health data, this uses prescription data obtained by the MedSat dataset.</p>
-        <p>All scores given are in Z Scores. A Z-score tells you how far a value is from the mean in units of standard deviations.</p>
+        <p>All scores given are in Z Scores. A Z-score tells you how far a value is from the mean in units of standard
+            deviations.</p>
         <ul>
             <li>0 → exactly at the mean</li>
             <li>+1 z → One Standard Deviation above the mean</li>
             <li>-1 z → One Standard Deviation below the mean</li>
         </ul>
-        <p>When selecting an MSOA polygon, you will also be provided with the street level Cycling Quality Index (CQI) Scores, calculated from: <a href="https://www.osm-verkehrswende.org/cqi/">https://www.osm-verkehrswende.org/cqi/</a></p>
-        <p>If the score overlay CQI Space Syntax is selected, the streets will show their CQI scores with the Space Syntax algorithms applied to them.</p>
+        <p>When selecting an MSOA polygon, you will also be provided with the street level Cycling Quality Index (CQI)
+            Scores, calculated from: <a
+                href="https://www.osm-verkehrswende.org/cqi/">https://www.osm-verkehrswende.org/cqi/</a></p>
+        <p>If the score overlay CQI Space Syntax is selected, the streets will show their CQI scores with the Space
+            Syntax algorithms applied to them.</p>
         <p>At the bottom of the page will be a description of what the score selected means.</p>
-        <p>Generally the goal of the colours is <strong>BLUE</strong> is <strong>GOOD</strong> and <strong>RED</strong> is <strong>BAD</strong>.</p>
+        <p>Generally the goal of the colours is <strong>BLUE</strong> is <strong>GOOD</strong> and <strong>RED</strong>
+            is <strong>BAD</strong>.</p>
         <p>To see the scores overlay with a single colour palette, add the /?colour URL parameter.</p>
         <p>To see more scores, add the /?dev URL parameter.</p>
         <p>?colour&dev would enable both of these.</p>
+    </div>
+</div>
+
+<div class="popupIContainer" style="display: none;" id="popupDContainer">
+    <div class="popupText">
+        <h2>Score Descriptions</h2>
+            <p>All scores are displayed in Z-Scores, 0 is the Mean, +1 is one standard deviation above the mean.</p>
+            <p><b>Commuter Rate</b></p>
+            <p>The percentage of people who reported commuting to work by bicycle in the UK 2021 Census for that MSOA</p>
+            <p><b>Crash Rate</b></p>
+            <p>The total number of cycling incidents reported by Department of Transport of any severity in that MSOA in 2021</p>
+            <p><b>Mean CQI Scores</b></p>
+            <p>The average Cycling Quality Index (CQI) score for each MSOA is calculated based on the scores of individual streets (or "ways") within the MSOA, using the methodology provided by <a href="osm-verkehrswende.org/cqi">osm-verkehrswende.org</a>, with the overall score being the average street CQI score.</p>
+            <p>When selecting an MSOA, with the Mean CQI Scores drop down selected, the roads will show their individual CQI scores, with the bottom left index showing what colour the score corresponds with, 0 being the worst and 10 the best</p>
+            <p><b>CQI Space Syntax</b></p>
+            <p>The score for each MSOA is calculated using the Space Syntax methodology, which incorporates edge harmonic and betweenness centrality measures, in addition with the already calculated Cycling Quality Index (CQI) score. These values are then also weighted by the length of each road segment and averaged to produce a final infrastructure score for the MSOA.</p>
+            <p>When selecting an MSOA, with the CQI Space Syntax overlay drop down selected, the space syntax weighthings can be viewed, with stronger hue showing a higher score (likely from both a good CQI score and good centrality score)</p>
+            <p><b>Overall Score</b></p>
+            <p>A combination of the CQI Space Index Score + The Commute Rate Score + the Crash Rate Score</p>
+            <p><b>Commute Path</b></p>
+            <p>Using UK Census 2021 Origin-Destination travel data, the most common commuting destination is identified for each MSOA, regardless of mode of transport. A straight-line path is then drawn from the origin MSOA to its corresponding destination MSOA, and each MSOA intersected by this path is identified. For this route, the average values of three key metrics <B>CQI Space Syntax, Commute Rate, and Crash Rate </B> are calculated across all MSOAs traversed by the line. This composite score provides a route-based view of the cycling conditions a cycling commuter would face for each MSOA</p>
+            <p><b>Heath Scores</b></p>
+            <p>Each health score for a MSOA (diabetes, anxiety, hypertension, opioids, depression, asthma) is derived using the MedSat dataset, where the score reflects the number of people within an MSOA taking medications that are associated with that condition. The total score is the total prescription rate for that MSOA.</p>
     </div>
 </div>
 

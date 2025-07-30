@@ -15,8 +15,8 @@ from sklearn.preprocessing import MinMaxScaler
 
 # Change this <-----
 Region = 'London'
-x_label= 'OverallCycleScore'
-y_label='hypertension'
+x_label= 'commute_rate'
+y_label= 'diabetes'
 #Threshold Score (ScoreCQI), Crash Rate, Commute Rate, CQI Mean (index_length), CQI Space Syntax (index_space_syntax_length) and Commute Path.
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))

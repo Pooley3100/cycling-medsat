@@ -10,9 +10,9 @@ import statsmodels.api as sm
 from sklearn.preprocessing import StandardScaler
  
 # Edit this <------
-Region = 'London'
+Region = 'Sheffield'
 x_label_features = 'Remove_crash_threshold'
-y_label = 'hypertension'
+y_label = 'diabetes'
 
 
 

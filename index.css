@@ -1,3 +1,7 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
 #map {
     height: 100%;
     width: 100%;
@@ -19,20 +23,43 @@ body {
     padding: 0;
 }
 
-#descBox{
-    display: flex;
-    width: 100%;
-    justify-content: center;
+#descP{
+    width: 90%;
+    text-align: center;
 }
 
-#iButton {
-    width: auto;
-    margin-right: 20px;
+.attribute{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
+
+.pAttribute{
+    padding: 10px
+}
+
+#descBox{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    
+}
+
+.selectorButton:hover{
+    scale: 1.05;
+}
+
+.selectorButton {
     margin-top: 10px;
     font-size: x-large;
     margin-bottom: 10px;
     border-radius: 10px;
-    margin-right: 5%;
 }
 
 .NavBar {
@@ -41,18 +68,23 @@ body {
     background-color: #e1aeae;
     border: 2px solid #333;
     box-shadow: 0 2px 5px rgba(250, 242, 242, 0.2);
-    padding: 10px 20px;
     text-align: center;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     color: rgb(20, 10, 10);
     font-size: 1.2em;
 
 }
 
+.iWrapper{
+    display: flex;
+    justify-content: center;
+    width: 10%;
+}
+
 .title {
     display: flex;
+    width: 80%;
     justify-content: center;
 }
 
@@ -63,21 +95,22 @@ body {
 }
 
 .popupIContainer {
+    border-radius: 10px;
     transform: translate(-50%, -50%);
     display: block;
     position: fixed;
-    background-color: wheat;
+    background-color: #f3fcaf;
+    text-align: center;
     left: 50%;
     top: 50%;
     z-index: 1000;
     width: 30%;
     height: 35%;
-    border-radius: 2px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
     border: 1px solid black;
-    overflow: auto; /* Enable scrolling */
-    max-height: 80%; /* Limit height to allow scrolling */
-    max-width: 90%; /* Limit width to allow scrolling */
+    overflow: auto; /* Enables scrolling */
+    max-height: 80%; 
+    max-width: 90%; 
     
 }
 
@@ -98,15 +131,26 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    font-family: 'Arial', sans-serif;
     color: #333;
     transition: transform 0.3s ease;
 }
 
+@media screen and (max-width: 1200px) {
+    #citySelector {
+        width: 150px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    #citySelector {
+        width: 10%;
+    }
+}
+
 #citySelector {
-    width: 20%;
+    font-size: large;
+    margin-left: 10px;
     padding: 15px;
-    font-size: 1.2em;
     border: 2px solid #333;
     border-radius: 5px;
     background-color: #f9f9f9;
@@ -139,7 +183,6 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    font-family: 'Arial', sans-serif;
     color: #333;
     transition: transform 0.3s ease;
 }
@@ -156,7 +199,6 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    font-family: 'Arial', sans-serif;
     color: #333;
     transition: transform 0.3s ease;
 }
