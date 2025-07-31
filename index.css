@@ -42,11 +42,24 @@ body {
     padding: 10px
 }
 
+@media screen and (max-height: 900px) {
+    #DButton {
+        white-space: nowrap;
+    }
+}
+
+@media screen and (min-height: 900px) {
+    #DButton {
+        white-space: wrap;
+    }
+}
+
 #descBox{
     justify-content: center;
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: auto;
     width: 100%;
     
 }
@@ -62,9 +75,21 @@ body {
     border-radius: 10px;
 }
 
+@media screen and (max-height: 900px) {
+    .NavBar {
+        height: 9%;
+    }
+}
+
+@media screen and (min-height: 900px) {
+    .NavBar {
+        height: auto;
+    }
+}
+
 .NavBar {
     width: 100%;
-    height: auto;
+    height: 9%;
     background-color: #e1aeae;
     border: 2px solid #333;
     box-shadow: 0 2px 5px rgba(250, 242, 242, 0.2);
