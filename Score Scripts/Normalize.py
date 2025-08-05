@@ -1,6 +1,6 @@
 """
 
-Takes results in msoa_scores.csv and normalizes each = result_norm
+Takes results in msoa_scores.csv and normalis(z)es each = result_norm
 
 standard scaler should do z scores
 

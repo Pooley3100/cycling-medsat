@@ -1,54 +1,49 @@
 import csv
-import math
+from math import radians, cos, sin, asin, sqrt
 import os
 
-# Define the center of London (latitude and longitude)
+# Define the center of London (latitude and longitude), charing cross
 LONDON_LAT = 51.5074
 LONDON_LON = -0.1278
 
-# Function to calculate the Haversine distance
-def haversine(lat1, lon1, lat2, lon2):
-    # Convert latitude and longitude from degrees to radians
-    lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
-    
-    # Haversine formula
-    dlat = lat2 - lat1
-    dlon = lon2 - lon1
-    a = math.sin(dlat / 2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2)**2
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-    R = 6371  # Radius of Earth in kilometers
-    return R * c
+#Haversine Function (NOT MINE) From: https://stackoverflow.com/questions/4913349/haversine-formula-in-python-bearing-and-distance-between-two-gps-points
+def haversine(lon1, lat1, lon2, lat2):
+    """
+    Calculate the great circle distance in kilometers between two points 
+    on the earth (specified in decimal degrees)
+    """
+    # convert decimal degrees to radians 
+    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
+
+    # haversine formula 
+    dlon = lon2 - lon1 
+    dlat = lat2 - lat1 
+    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+    c = 2 * asin(sqrt(a)) 
+    r = 6371 # Radius of earth in kilometers. Use 3956 for miles. Determines return value units.
+    return c * r
 
 
-# Set the working directory to the current script's directory
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-# Input and output file paths
 input_file = "msoa_loc_score.csv"
 output_file = "msoa_distances_from_london.csv"
 
 # Read the input file and calculate distances
 with open(input_file, "r") as infile, open(output_file, "w", newline="") as outfile:
     reader = csv.DictReader(infile)
-    fieldnames = reader.fieldnames + ["Distance_from_London_km"]  # Add a new column for distance
+    fieldnames = reader.fieldnames + ["Distance_from_London_km"]
     writer = csv.DictWriter(outfile, fieldnames=fieldnames)
-    
-    # Write the header to the output file
     writer.writeheader()
     
-    # Process each row
     for row in reader:
         try:
-            # Extract latitude and longitude
             lat = float(row["Latitude"])
             lon = float(row["Longitude"])
             
-            # Calculate the distance from London
-            distance = haversine(lat, lon, LONDON_LAT, LONDON_LON)
+            # Calculate the distance from London Center
+            distance = haversine(lon, lat, LONDON_LON, LONDON_LAT)
+            row["Distance_from_London_km"] = round(distance, 2)
             
-            # Add the distance to the row
-            row["Distance_from_London_km"] = round(distance, 2)  # Round to 2 decimal places
-            
-            # Write the updated row to the output file
             writer.writerow(row)
         except ValueError as e:
             print(f"Error processing row {row}: {e}")

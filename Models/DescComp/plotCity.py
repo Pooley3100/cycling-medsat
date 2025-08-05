@@ -5,7 +5,7 @@ import os
 
 # Change <======
 
-x_label = 'commute_rate_avg'
+x_label = 'index_space_syntax_length_avg'
 y_label = 'hypertension_avg'
 
 #=========

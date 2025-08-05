@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 Region = 'London'
 #Current dependant to compare
-dependant_in = 'commute_rate'
+dependant_in = 'index_space_syntax_length'
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 

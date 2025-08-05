@@ -16,7 +16,7 @@ from sklearn.preprocessing import MinMaxScaler
 # Change this <-----
 Region = 'London'
 x_label= 'commute_rate'
-y_label= 'diabetes'
+y_label= 'hypertension'
 #Threshold Score (ScoreCQI), Crash Rate, Commute Rate, CQI Mean (index_length), CQI Space Syntax (index_space_syntax_length) and Commute Path.
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -43,6 +43,10 @@ X = df[x_label]
 # scaler = MinMaxScaler()
 # X = scaler.fit_transform(df[[x_label]])
 y = df[y_label]
+
+#Also print correlation
+correlation = df[x_label].corr(df[y_label])
+print(f'Correlation between {x_label} and {y_label}: {correlation}')
 
 # ordinary least squares
 X = sm.add_constant(X)

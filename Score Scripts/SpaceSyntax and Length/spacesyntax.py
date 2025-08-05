@@ -1,9 +1,9 @@
 """
 
-also applied space syntax weighting to roads, those roads that are more important get larger score applied.
+applied space syntax weighting to roads, those roads that are more important in network centrality get larger scores applied.
 
 
-gets score for each way
+gets score for each wayå
 6) CQI Weight By length
 7) CQI Mean weighted by space syntax
 8) CQI Mean weighted by space syntax and road length
