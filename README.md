@@ -1,4 +1,4 @@
-# Pedal-Powered Insights: Localized Cycling Usage and Infrastructure Correlations with Public Health
+# Pedal-Powered Health: The Interplay Between Urban Cycling Infrastructure and Public Health
 
 # About
 Urban planners and public health officials are increasingly investing in cycling infrastructure to promote
