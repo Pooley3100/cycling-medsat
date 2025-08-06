@@ -26,6 +26,20 @@ OSM-Cycling-Quality-Index/__pycache__/
 !Score Scripts/LiverpoolDatasets/*.csv
 !Score Scripts/SheffieldDatasets/*.csv
 
+
+!Score Scripts/QueryLondonOSM.txt
+!Score Scripts/QueryManchesterOSM.txt
+
+!Score Scripts/Visuals/msoa_distances_from_london.csv
+!Score Scripts/Visuals/msoa_loc_score.csv
+!Models/Confound/London_msoa_income_scores.csv
+
+!Models/Confound/Sheffield_msoa_income_scores.csv
+!Models/Confound/London_msoa_income_scores.csv
+
+!Models/city_list.csv
+!Models/DescComp/desc_metrics_summary.csv
+
 !OSM-Cycling-Quality-Index/cycling_quality_index.py
 !OSM-Cycling-Quality-Index/definitions.py
 
