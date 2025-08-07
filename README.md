@@ -9,9 +9,18 @@ This project examines the local relationship between cycling infrastructure and 
 impact on health outcomes, aiming to understand how access to cycling resources influences community
 well-being.
 
+# Viewable at: https://pooley3100.github.io/cycling-medsat/
+
 ![What the dashboard looks like](OverallExample.png)
 
-# Todo's to run
+## DEMO Sheffield
+
+To test the software without having to run QGIS, the files for Sheffield are provided
+1) Ensure working directory set to within cycling-medsat-main
+2) Run run.py and can delete Score Scripts/SheffieldDatasets/Sheffield_msoa_scores.csv to see score re-creation, will need ODWP01EW_MSOA (see point 3 To Run) downloaded however for commute path score.
+
+
+# Todo's to FULLY run
 To use run.py, this should run the user through the steps required to creat a cycling & health map for the region
 
 ## To Run -> Need To Install First:

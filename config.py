@@ -1,12 +1,12 @@
 # Configuration settings for Cycling Quality Index
 
 #   ======> Edit <========
-Region = 'Birmingham'
+# Region = 'Birmingham'
 #Region = 'Bristol'
 # Region = 'Leeds'
 # Region = 'Manchester'
 # Region = 'London'
-# Region = 'Sheffield'
+Region = 'Sheffield'
 # Region = 'Liverpool'
 
 #Add path here for geojson's from Overpass Turbo

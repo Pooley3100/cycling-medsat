@@ -67,3 +67,11 @@ OSM-Cycling-Quality-Index/__pycache__/
 !Datasets/Filtered_Manchester_Polygon.geojson
 !Datasets/Filtered_Liverpool_Polygon.geojson
 !Datasets/Filtered_Sheffield_Polygon.geojson
+
+
+
+!Datasets/Sheffield-Overpass-Query-Boxes/
+!Datasets/Sheffield-Overpass-Query-Boxes/**
+!Score Scripts/SheffieldDatasets/cycling_quality_index.geojson
+!Datasets/Sheffield_cqi_jsons_msoa/
+!Datasets/Sheffield_cqi_jsons_msoa/**
