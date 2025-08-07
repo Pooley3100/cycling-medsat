@@ -9,7 +9,7 @@ This project examines the local relationship between cycling infrastructure and 
 impact on health outcomes, aiming to understand how access to cycling resources influences community
 well-being.
 
-# Viewable at: https://pooley3100.github.io/cycling-medsat/
+## Viewable at: https://pooley3100.github.io/cycling-medsat/
 
 ![What the dashboard looks like](OverallExample.png)
 
